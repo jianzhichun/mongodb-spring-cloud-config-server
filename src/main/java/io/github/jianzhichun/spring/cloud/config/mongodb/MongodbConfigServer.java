@@ -57,7 +57,6 @@ public interface MongodbConfigServer {
 										, groupingBy(
 											MongoPropertySource::getLabel
 											, mapping(MongoPropertySource::getProfile, toList())))));
-							
 				}
 				public @GetMapping("/config/mongo/{id}") MongoPropertySource getConfigById(@PathVariable("id") String id){
 					return repository.findById(id);
@@ -71,8 +70,7 @@ public interface MongodbConfigServer {
 			Function<Map<String,Object>, Map<String,Object>> flatten = new YamlProcessor(){
 				public Function<Map<String, Object>, Map<String, Object>> getFlattenFunction() {
 					return new Function<Map<String,Object>, Map<String,Object>>() {
-						@Override
-						public Map<String, Object> apply(Map<String, Object> source) {
+						public @Override Map<String, Object> apply(Map<String, Object> source) {
 							return getFlattenedMap(source);
 						} 
 					};
@@ -83,8 +81,9 @@ public interface MongodbConfigServer {
 					String[] profiles = StringUtils.commaDelimitedListToStringArray(profile);
 					Environment environment = new Environment(application, profiles, label, null, null);
 					List<MongoPropertySource> sources = newArrayList();
+					Set<String> bf = newHashSet();
 					repository.findByAppAndLabelAndProfileIn(application, label, profiles)
-							.forEach(source -> generateSources(sources, source));
+							.forEach(source -> generateSources(sources, source, bf));
 					sources.stream().sorted().forEach(source->{
 						String sourceName = generateSourceName(source);
 						Map<String, Object> flatSource = flatten.apply(source.getSource());
@@ -93,13 +92,12 @@ public interface MongodbConfigServer {
 					});
 					return environment;
 				}
-				private void generateSources(List<MongoPropertySource> sources, MongoPropertySource source){
+				private void generateSources(List<MongoPropertySource> sources, MongoPropertySource source, Set<String> bf){
 					sources.add(source);
 					if(!CollectionUtils.isEmpty(source.getIncludes())){
-						Set<String> bf = newHashSet(source.getId());
 						source.getIncludes().forEach(include -> {
 							if(bf.add(include)){
-								generateSources(sources, repository.findById(include));
+								generateSources(sources, repository.findById(include), bf);
 							}
 						});
 					}

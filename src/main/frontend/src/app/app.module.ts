@@ -5,6 +5,7 @@ import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { JSONEditorModule } from 'ng2-jsoneditor';
+import { AccordionModule } from 'ngx-bootstrap/accordion';
 
 @NgModule({
   declarations: [
@@ -14,6 +15,7 @@ import { JSONEditorModule } from 'ng2-jsoneditor';
     BrowserModule,
     FormsModule, 
     JSONEditorModule,
+    AccordionModule.forRoot(),
     HttpModule
   ],
   providers: [],
