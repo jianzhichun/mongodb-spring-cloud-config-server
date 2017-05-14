@@ -6,6 +6,7 @@ import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { JSONEditorModule } from 'ng2-jsoneditor';
 import { AccordionModule } from 'ngx-bootstrap/accordion';
+import { NgPipesModule } from 'ngx-pipes';
 
 @NgModule({
   declarations: [
@@ -13,10 +14,11 @@ import { AccordionModule } from 'ngx-bootstrap/accordion';
   ],
   imports: [
     BrowserModule,
-    FormsModule, 
     JSONEditorModule,
+    FormsModule, 
     AccordionModule.forRoot(),
-    HttpModule
+    NgPipesModule,
+    HttpModule 
   ],
   providers: [],
   bootstrap: [AppComponent]

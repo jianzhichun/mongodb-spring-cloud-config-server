@@ -28,6 +28,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import static com.google.common.collect.Sets.*;
@@ -38,6 +39,7 @@ import io.github.jianzhichun.spring.cloud.config.mongodb.domain.MongoPropertySou
 public interface MongodbConfigServer {
 	
 	@RestController
+	@RequestMapping("/api")
 	interface MongoConfigServerController{}
 	@org.springframework.context.annotation.Configuration
 	@EnableMongoRepositories(basePackages = {"io.github.jianzhichun.spring.cloud.config.mongodb.domain"})

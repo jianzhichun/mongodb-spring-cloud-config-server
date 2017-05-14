@@ -3,4 +3,6 @@ spring:
     mongodb:
       uri: mongodb://localhost/config-db1
 
+server.port: 26850
+
 logging.level.org.springframework.data.mongodb: DEBUG
