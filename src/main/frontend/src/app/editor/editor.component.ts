@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Http } from '@angular/http';
 import { JsonEditorComponent, JsonEditorOptions } from 'ng2-jsoneditor';
-import { RuntimeCompiler } from '@angular/compiler';
 
 @Component({
   selector: 'app-editor',
