@@ -1,6 +1,6 @@
-import { Component, ViewChild } from '@angular/core';
-import { JsonEditorComponent, JsonEditorOptions } from 'ng2-jsoneditor';
+import { Component } from '@angular/core';
 import { Http } from '@angular/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -8,16 +8,13 @@ import { Http } from '@angular/http';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  public editorOptions: JsonEditorOptions;
   public configs: any;
-  @ViewChild(JsonEditorComponent) editor: JsonEditorComponent;
 
-  constructor(private http: Http) { 
-    this.editorOptions = new JsonEditorOptions();
+  constructor(private http: Http, private router: Router) { 
     this.http.get("/api/config/mongo").subscribe(data => this.configs = data.json());
   }
 
-  public setTreeMode() {
-    this.editor.setMode('tree');
+  public select(app, label, profile){
+    this.router.navigate(['config', [app, label, profile].join('-')])
   }
 }

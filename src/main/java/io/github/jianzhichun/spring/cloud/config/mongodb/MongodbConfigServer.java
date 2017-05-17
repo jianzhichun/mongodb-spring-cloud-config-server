@@ -1,6 +1,10 @@
 package io.github.jianzhichun.spring.cloud.config.mongodb;
 
 import static com.google.common.collect.Lists.newArrayList;
+import static com.google.common.collect.Sets.newHashSet;
+import static java.util.stream.Collectors.groupingBy;
+import static java.util.stream.Collectors.mapping;
+import static java.util.stream.Collectors.toList;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
@@ -11,7 +15,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.Function;
-import static java.util.stream.Collectors.*;
 
 import org.springframework.beans.factory.config.YamlProcessor;
 import org.springframework.cloud.config.environment.Environment;
@@ -30,8 +33,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import static com.google.common.collect.Sets.*;
 
 import io.github.jianzhichun.spring.cloud.config.mongodb.domain.MongoPropertySource;
 import io.github.jianzhichun.spring.cloud.config.mongodb.domain.MongoPropertySourceRepository;

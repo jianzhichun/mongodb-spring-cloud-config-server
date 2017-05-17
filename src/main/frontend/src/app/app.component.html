@@ -1,13 +1,19 @@
-<accordion>
-  <accordion-group heading="{{app[0]}}" *ngFor="let app of configs | pairs">
-    <accordion-group heading="{{labelProfiles[0]}}" *ngFor="let labelProfiles of app[1] | pairs">
-    <button type="button" class="btn btn-primary btn-sm" (click)="addItem()">Add
-      Item
+<md-sidenav-container class="example-container">
+  <md-sidenav #sidenav class="example-sidenav">
+    <accordion>
+      <accordion-group heading="{{app[0]}}" *ngFor="let app of configs | pairs">
+        <accordion-group heading="{{labelProfiles[0]}}" *ngFor="let labelProfiles of app[1] | pairs">
+          <div *ngFor="let profile of labelProfiles[1]" (click)="select(app[0],labelProfiles[0],profile)">
+            {{profile}}
+          </div>
+        </accordion-group>
+      </accordion-group>
+    </accordion>
+  </md-sidenav>
+  <div class="container-fluid">
+    <button md-button (click)="sidenav.open()">
+      Open sidenav
     </button>
-    <div *ngFor="let profile of labelProfiles[1]">{{profile}}</div>
-  </accordion-group>
-  </accordion-group>
-</accordion>
-<div style="width: 400px; height: 400px;">
-  <json-editor [options]="editorOptions" [data]="data"></json-editor>
-</div>
+    <router-outlet></router-outlet>
+  </div>
+</md-sidenav-container>
